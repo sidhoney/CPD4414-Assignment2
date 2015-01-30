@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package cpd4414.assign2;
 
 import cpd4414.assign2.OrderQueue;
@@ -32,22 +31,22 @@ import org.junit.Test;
  * @author Len Payne <len.payne@lambtoncollege.ca>
  */
 public class OrderQueueTest {
-    
+
     public OrderQueueTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -59,10 +58,38 @@ public class OrderQueueTest {
         order.addPurchase(new Purchase("PROD0004", 450));
         order.addPurchase(new Purchase("PROD0006", 250));
         orderQueue.add(order);
-        
         long expResult = new Date().getTime();
         long result = order.getTimeReceived().getTime();
         assertTrue(Math.abs(result - expResult) < 1000);
     }
-    
+
+    @Test
+    public void testWhenCustomerNameDoesNotExistAndCustomerIDDoesNotExistThenThrowException() {
+        OrderQueue orderQueue = new OrderQueue();
+        boolean didthrow = false;
+        Order order = new Order("", "");
+        try {
+            orderQueue.add(order);
+        } catch (Exception ex) {
+
+            didthrow = true;
+        }
+        assertTrue(didthrow);
+
+    }
+
+    @Test
+    public void testWhenNoListOfPurchasesExistsThenThrowException() throws Exception {
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        boolean result = false;
+
+        try {
+            orderQueue.add(order);
+        } catch (Exception e) {
+            result = true;
+        }
+        assertTrue(result);
+    }
+
 }
