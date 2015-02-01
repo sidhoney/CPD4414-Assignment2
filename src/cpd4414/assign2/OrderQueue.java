@@ -26,7 +26,7 @@ import java.util.Queue;
  */
 public class OrderQueue {
     Queue<Order> orderQueue = new ArrayDeque<>();
-    
+    Queue<Order> processing = new ArrayDeque<>();
     public void add(Order order) {
         if(order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty())
         {
@@ -39,6 +39,11 @@ public class OrderQueue {
         orderQueue.add(order);
         order.setTimeReceived(new Date());
     }
+    public Order next() {
+        return orderQueue.element();
+    }
+    
+    
     private class NoCustomerException extends RuntimeException{}
     private class NoPurchasesException extends RuntimeException{}
     

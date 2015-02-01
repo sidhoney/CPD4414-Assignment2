@@ -70,7 +70,7 @@ public class OrderQueueTest {
         Order order = new Order("", "");
         try {
             orderQueue.add(order);
-        } catch (Exception ex) {
+        } catch (Exception e) {
 
             didthrow = true;
         }
@@ -82,14 +82,43 @@ public class OrderQueueTest {
     public void testWhenNoListOfPurchasesExistsThenThrowException() throws Exception {
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
-        boolean result = false;
+        boolean didthrow = false;
 
         try {
             orderQueue.add(order);
         } catch (Exception e) {
-            result = true;
+            didthrow = true;
         }
-        assertTrue(result);
+        assertTrue(didthrow);
     }
-
+    
+    @Test
+    public void testWhenOrdersInTheSystemThenReturnOrderWithEarliestTimeRecieved() throws Exception {
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        orderQueue.add(order);
+        Order orderNew = new Order("CUST00002", "ABCDE Construction");
+        orderNew.addPurchase(new Purchase("PROD0004", 450));
+        orderNew.addPurchase(new Purchase("PROD0006", 250));
+        orderQueue.add(orderNew);
+        Order expResult = order;
+        Order result = orderQueue.next();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testWhenNoOrdersInTheSystemThenReturnNull() {
+        OrderQueue orderQueue = new OrderQueue();
+        Order expResult = null;
+        String result = "";
+        try {
+            orderQueue.next();
+        } catch (Exception e) {
+            result = null;
+        }
+        assertEquals(expResult, result);
+    }
+    
 }
