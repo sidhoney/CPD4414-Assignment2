@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Len Payne <len.payne@lambtoncollege.ca>.
+ * Copyright 2015 Sidhartha Gopinath <sidharthagopinath@outlook.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package cpd4414.assign2;
 
 import org.junit.Test;
@@ -21,10 +20,10 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author Sidhartha Gopinath <sidharthagopinath@outlook.com>
  */
 public class InventoryTest {
-    
+
     public InventoryTest() {
     }
 
@@ -33,14 +32,14 @@ public class InventoryTest {
         int id = -100;
         int expResult = -1;
         int result = Inventory.getQuantityForId(id);
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testGetQuantityForIdReturnsValidResultForPositiveID() {
         int id = 4;
         int result = Inventory.getQuantityForId(id);
-        assertTrue(result >= 0);        
+        assertTrue(result >= 0);
     }
-    
+
 }

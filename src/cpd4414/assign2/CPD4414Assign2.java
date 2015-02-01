@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Len Payne <len.payne@lambtoncollege.ca>.
+ * Copyright 2015 Sidhartha Gopinath <sidharthagopinath@outlook.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package cpd4414.assign2;
 
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author Sidhartha Gopinath <sidharthagopinath@outlook.com>
  */
 public class CPD4414Assign2 {
 
@@ -28,5 +27,5 @@ public class CPD4414Assign2 {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
+
 }

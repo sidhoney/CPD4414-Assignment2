@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Len Payne <len.payne@lambtoncollege.ca>.
+ * Copyright 2015 Sidhartha Gopinath <sidharthagopinath@outlook.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package cpd4414.assign2;
 
 import java.util.ArrayDeque;
@@ -22,29 +21,32 @@ import java.util.Queue;
 
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author Sidhartha Gopinath <sidharthagopinath@outlook.com>
  */
 public class OrderQueue {
+
     Queue<Order> orderQueue = new ArrayDeque<>();
     Queue<Order> processing = new ArrayDeque<>();
+
     public void add(Order order) {
-        if(order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty())
-        {
+        if (order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty()) {
             throw new NoCustomerException();
         }
-        if(order.getListOfPurchases().isEmpty())
-        {
+        if (order.getListOfPurchases().isEmpty()) {
             throw new NoPurchasesException();
         }
         orderQueue.add(order);
         order.setTimeReceived(new Date());
     }
+
     public Order next() {
         return orderQueue.element();
     }
-    
-    
-    private class NoCustomerException extends RuntimeException{}
-    private class NoPurchasesException extends RuntimeException{}
-    
+
+    private class NoCustomerException extends RuntimeException {
+    }
+
+    private class NoPurchasesException extends RuntimeException {
+    }
+
 }

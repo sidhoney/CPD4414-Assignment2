@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Len Payne <len.payne@lambtoncollege.ca>.
+ * Copyright 2015 Sidhartha Gopinath <sidharthagopinath@outlook.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author Sidhartha Gopinath <sidharthagopinath@outlook.com>
  */
 public class OrderQueueTest {
 
@@ -91,7 +91,7 @@ public class OrderQueueTest {
         }
         assertTrue(didthrow);
     }
-    
+
     @Test
     public void testWhenOrdersInTheSystemThenReturnOrderWithEarliestTimeRecieved() throws Exception {
         OrderQueue orderQueue = new OrderQueue();
@@ -100,14 +100,14 @@ public class OrderQueueTest {
         order.addPurchase(new Purchase("PROD0006", 250));
         orderQueue.add(order);
         Order orderNew = new Order("CUST00002", "ABCDE Construction");
-        orderNew.addPurchase(new Purchase("PROD0004", 450));
-        orderNew.addPurchase(new Purchase("PROD0006", 250));
+        orderNew.addPurchase(new Purchase("PROD0005", 350));
+        orderNew.addPurchase(new Purchase("PROD0006", 450));
         orderQueue.add(orderNew);
         Order expResult = order;
         Order result = orderQueue.next();
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testWhenNoOrdersInTheSystemThenReturnNull() {
         OrderQueue orderQueue = new OrderQueue();
@@ -120,5 +120,5 @@ public class OrderQueueTest {
         }
         assertEquals(expResult, result);
     }
-    
+
 }

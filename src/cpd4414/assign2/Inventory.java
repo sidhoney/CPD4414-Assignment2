@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Len Payne <len.payne@lambtoncollege.ca>.
+ * Copyright 2015 Sidhartha Gopinath <sidharthagopinath@outlook.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,13 @@ import java.sql.*;
 /**
  * This class is a wrapper around the Inventory table.
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author Sidhartha Gopinath <sidharthagopinath@outlook.com>
  */
 public class Inventory {
 
     /**
      * Utility method for acquiring a valid Database Connection
+     *
      * @return the database Connection object
      */
     private static Connection getConnection() {
@@ -46,19 +47,20 @@ public class Inventory {
     }
 
     /**
-     * Finds out how many of an item are available in the Inventory based on 
-     * its product ID. Returns -1 if there is an error.
+     * Finds out how many of an item are available in the Inventory based on its
+     * product ID. Returns -1 if there is an error.
+     *
      * @param id - the product ID
      * @return - the quantity
      */
     public static int getQuantityForId(int id) {
         int quantity = -1;
         try {
-            Connection conn = getConnection();        
+            Connection conn = getConnection();
             String query = "SELECT quantity FROM inventory WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, id);            
-            ResultSet rs = pstmt.executeQuery();            
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
             rs.first();
             quantity = rs.getInt("quantity");
             conn.close();
