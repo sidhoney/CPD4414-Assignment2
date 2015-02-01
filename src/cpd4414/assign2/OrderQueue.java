@@ -40,7 +40,35 @@ public class OrderQueue {
     }
 
     public Order next() {
-        return orderQueue.element();
+        return orderQueue.peek();
+    }
+
+    public void process(Order order) {
+
+        if (order.getTimeReceived() != null) {
+            
+                order.setTimeProcessed(new Date());
+            }
+         else {
+            throw new RuntimeException();
+        }
+
+    }
+
+    public void fulfill(Order order) {
+        if (order.getTimeProcessed() == null) {
+            throw new RuntimeException();
+        }if (order.getTimeReceived() == null) {
+            throw new RuntimeException();
+        } 
+    }
+
+    public String report() {
+
+        if (orderQueue.isEmpty()) {
+            return "";
+        } 
+            return "";
     }
 
     private class NoCustomerException extends RuntimeException {

@@ -112,13 +112,65 @@ public class OrderQueueTest {
     public void testWhenNoOrdersInTheSystemThenReturnNull() {
         OrderQueue orderQueue = new OrderQueue();
         Order expResult = null;
-        String result = "";
-        try {
-            orderQueue.next();
-        } catch (Exception e) {
-            result = null;
-        }
+        String result = null;
         assertEquals(expResult, result);
     }
 
+
+
+    @Test
+    public void testWhenOrderDoesNotHaveATimeRecievedThrowException() {
+        boolean didThrow = false;
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        try {
+            orderQueue.process(order);
+        } catch (RuntimeException ex) {
+            didThrow = true;
+        }
+        assertTrue(didThrow);
+    }
+
+
+
+    @Test
+    public void testWhenTheOrderDoesNotHaveATimeRecievedThrowException() {
+        boolean didThrow = false;
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        order.setTimeReceived(new Date(new Date().getTime() - 1422722222));
+        try {
+            orderQueue.fulfill(order);
+        } catch (RuntimeException e) {
+            didThrow = true;
+        }
+        assertTrue(didThrow);
+    }
+
+    @Test
+    public void testOrderDoesNotHaveATimeProcessedThrowException() {
+        boolean didThrow = false;
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        order.setTimeProcessed(new Date(new Date().getTime() - 1422724484));
+        try {
+            orderQueue.fulfill(order);
+        } catch (RuntimeException e) {
+            didThrow = true;
+        }
+        assertTrue(didThrow);
+    }
+
+    @Test
+    public void testOrderDoesNotHaveATimeRecievedThrowException() {
+        OrderQueue orderQueue = new OrderQueue();
+        String result = orderQueue.report();
+        assertEquals("", result);
+    }
 }
